@@ -16,8 +16,8 @@ CREATE TABLE accounts (
 );
 
 CREATE TABLE accounts_items (
-    "user_id" INT REFERENCES accounts(user_id) NOT NULL,
-    "item_id" INT REFERENCES items(item_id) NOT NULL,
+    "user_id" INT REFERENCES accounts(user_id) ON DELETE SET NULL ,
+    "item_id" INT REFERENCES items(item_id) ON DELETE SET NULL ,
     UNIQUE ("user_id", "item_id")
 
 );

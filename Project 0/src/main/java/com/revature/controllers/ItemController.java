@@ -31,6 +31,9 @@ public class ItemController {
         return itemService.getItem(id);
     }
 
+    @DeleteMapping("/{id}")
+    public Item deleteItem (@PathVariable int id) { return itemService.deleteItem(id); }
+
     @PostMapping(consumes = "application/json",produces ="application/json")
     public ResponseEntity<Item> addItem(@RequestBody Item item){
         item = itemService.addItem(item);

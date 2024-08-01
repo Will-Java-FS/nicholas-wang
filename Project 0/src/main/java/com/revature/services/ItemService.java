@@ -11,4 +11,5 @@ public interface ItemService {
     public List<Item> getAllItems();
     public Item addItem(Item item);
     public Item updateItem(Item item);
+    public Item deleteItem(int id);
 }

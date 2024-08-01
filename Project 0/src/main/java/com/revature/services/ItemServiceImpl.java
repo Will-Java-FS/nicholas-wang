@@ -27,10 +27,16 @@ public class ItemServiceImpl implements ItemService {
     public Item addItem(Item item){
         return itemRepo.save(item);
     }
+
     @Override
     public Item updateItem(Item change){
         return itemRepo.save(change);
     }
 
-
+    @Override
+    public Item deleteItem(int id) {
+        Item item = getItem(id);
+        itemRepo.deleteById(id);
+        return item;
+    }
 }
