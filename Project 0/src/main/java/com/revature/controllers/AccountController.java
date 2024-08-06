@@ -2,7 +2,7 @@ package com.revature.controllers;
 
 import com.revature.models.Account;
 import com.revature.models.Item;
-import com.revature.services.AccountService;
+import com.revature.services.AccountServiceImpl;
 import com.revature.services.ItemServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 public class AccountController {
 
     @Autowired
-    AccountService accountService;
+    AccountServiceImpl accountService;
 
     @Autowired
     ItemServiceImpl itemService;
@@ -63,7 +63,7 @@ public class AccountController {
     }
 
     @PostMapping("/{userId}/items/{itemId}")
-    public ResponseEntity<Item> addItemToAccount(@PathVariable int userId, @PathVariable int itemId) {
+    public ResponseEntity<List<Item>> addItemToAccount(@PathVariable int userId, @PathVariable int itemId) {
         Account existAccount = accountService.getAccountWithItemsById(userId);
         Item existItem = itemService.getItem(itemId);
 
@@ -72,9 +72,15 @@ public class AccountController {
 
         }
 
+        List<Item> items = existAccount.getItems();
+
+        if (items.contains(existItem)) {
+            return new ResponseEntity<>(items, HttpStatus.CONFLICT);
+        }
+
         existAccount.addItem(existItem);
         accountService.updateAccount(existAccount);
 
-        return ResponseEntity.ok(existItem);
+        return ResponseEntity.ok(existAccount.getItems());
     }
 }

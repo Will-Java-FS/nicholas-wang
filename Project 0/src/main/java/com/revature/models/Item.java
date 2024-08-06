@@ -53,13 +53,27 @@ public class Item {
         this.quantity = quantity;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+////        if (this == o) return true;
+////        if (o == null || getClass() != o.getClass()) return false;
+////        Actor actor = (Actor) o;
+////        return getId() == actor.getId() && getAge() == actor.getAge() && getWorth() == actor.getWorth() && Objects.equals(getName(), actor.getName());
+//        return false;
+//    }
+
     @Override
     public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Actor actor = (Actor) o;
-//        return getId() == actor.getId() && getAge() == actor.getAge() && getWorth() == actor.getWorth() && Objects.equals(getName(), actor.getName());
-        return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Item item = (Item) o;
+        return getId() == item.getId() && getQuantity() == item.getQuantity() && Objects.equals(
+            getName(), item.getName());
     }
 
     @Override
